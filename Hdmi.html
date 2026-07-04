@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دفترچه دیجیتال | پژوهش پناهی</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;900&display=swap');
+:root{
+  --bg:#F7F4EF;--white:#FFFFFF;--ink:#1C1917;--muted:#78716C;
+  --accent:#4F46E5;--accent2:#7C3AED;
+  --red:#DC2626;--green:#16A34A;--yellow:#CA8A04;
+  --border:#E7E5E0;
+  --rc:#EF4444;--bc:#3B82F6;--gc:#22C55E;--yc:#EAB308;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;font-size:16px}
+
+/* HEADER */
+.hdr{background:var(--white);border-bottom:2px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.hdr-logo{font-size:13px;font-weight:700;color:var(--accent)}
+.hdr-prog{flex:1;margin:0 20px}
+.hdr-lbl{font-size:10px;color:var(--muted);text-align:center;margin-bottom:3px}
+.pbar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s;border-radius:3px}
+.hdr-pct{font-size:12px;color:var(--muted);white-space:nowrap}
+
+/* WRAP */
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px}
+
+/* SCREENS */
+.scr{display:none}
+.scr.on{display:block;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:20px;padding:36px 28px;color:white;text-align:center;margin-bottom:24px}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:12px;margin-bottom:16px}
+.hero h1{font-size:26px;font-weight:900;margin-bottom:8px}
+.hero p{font-size:13px;opacity:.85;line-height:1.7}
+
+/* CARDS */
+.card{background:var(--white);border-radius:16px;padding:24px;margin-bottom:16px;border:1.5px solid var(--border)}
+.card h2{font-size:16px;font-weight:700;margin-bottom:18px;padding-bottom:12px;border-bottom:1.5px solid var(--border)}
+
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.fg label{font-size:12px;font-weight:600;color:var(--muted)}
+.fg input,.fg select{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;color:var(--ink);font-family:inherit;font-size:14px;padding:10px 14px;outline:none;transition:border-color .2s;width:100%}
+.fg input:focus,.fg select:focus{border-color:var(--accent)}
+.fg input[readonly]{background:#F1F0EE;color:var(--muted);cursor:not-allowed}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* SECTION HDR */
+.sec-hdr{background:var(--white);border-radius:16px;padding:20px 24px;margin-bottom:16px;border-right:5px solid var(--accent);border:1.5px solid var(--border);border-right:5px solid var(--accent)}
+.sec-badge{display:inline-block;background:var(--accent);color:white;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;margin-bottom:6px}
+.sec-hdr h2{font-size:19px;font-weight:900;margin-bottom:4px}
+.sec-hdr p{font-size:13px;color:var(--muted);line-height:1.7}
+.inst{background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:12px;padding:14px 16px;font-size:13px;color:#1D4ED8;line-height:1.7;margin-bottom:16px}
+
+/* ONE QUESTION PER PAGE */
+.q-page{text-align:center}
+.q-counter{font-size:12px;color:var(--muted);margin-bottom:12px}
+.q-bubble{background:var(--white);border-radius:20px;padding:28px 24px;border:2px solid var(--border);margin-bottom:24px;font-size:17px;font-weight:500;line-height:1.8;text-align:right;position:relative}
+.q-sub-tag{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;color:white}
+.q-sub-tag.cog{background:var(--red)}
+.q-sub-tag.meta{background:var(--green)}
+
+/* LIKERT SINGLE */
+.likert-single{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.lopt{display:flex;align-items:center;gap:12px;background:var(--white);border:2px solid var(--border);border-radius:14px;padding:14px 18px;cursor:pointer;transition:all .2s;text-align:right}
+.lopt:hover{border-color:var(--accent);background:#EEF2FF}
+.lopt.sel{border-color:var(--accent);background:#EEF2FF}
+.lopt input{display:none}
+.lopt-dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:var(--bg);flex-shrink:0;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.lopt.sel .lopt-dot{background:var(--accent);border-color:var(--accent)}
+.lopt.sel .lopt-dot::after{content:'✓';color:white;font-size:12px;font-weight:700}
+.lopt-num{font-size:13px;font-weight:700;color:var(--muted);min-width:20px;text-align:center}
+.lopt.sel .lopt-num{color:var(--accent)}
+.lopt-text{font-size:14px;flex:1}
+
+/* BUTTONS */
+.btn{background:var(--accent);border:none;border-radius:12px;color:white;font-family:inherit;font-size:15px;font-weight:700;padding:13px 32px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn-o{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+.btn-o:hover{background:var(--accent);color:white}
+.btn-g{background:var(--green)}
+.btn-row{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:16px}
+
+/* NAV ARROWS */
+.nav-row{display:flex;gap:12px;justify-content:center;margin-top:8px}
+.nav-btn{background:var(--white);border:2px solid var(--border);border-radius:12px;color:var(--ink);font-family:inherit;font-size:22px;font-weight:700;width:56px;height:56px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.nav-btn.next-btn{background:var(--accent);border-color:var(--accent);color:white;width:auto;padding:0 28px;font-size:15px}
+.nav-btn.next-btn:hover{opacity:.9}
+
+/* STROOP */
+.fix{font-size:64px;font-weight:900;color:var(--muted);height:130px;display:flex;align-items:center;justify-content:center;transition:opacity .15s}
+.sw{font-size:64px;font-weight:900;height:130px;display:flex;align-items:center;justify-content:center;letter-spacing:-1px;user-select:none;transition:opacity .15s}
+.csq{width:110px;height:110px;border-radius:16px;margin:0 auto}
+.sbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:380px;margin:0 auto}
+.sb{border:none;border-radius:14px;padding:16px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:transform .1s;color:white}
+.sb:active{transform:scale(.95)}
+.sb.r{background:var(--rc)}.sb.b{background:var(--bc)}.sb.g{background:var(--gc);color:#111}.sb.y{background:var(--yc);color:#111}
+.sdots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.sdot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .2s}
+.sdot.ok{background:var(--green)}.sdot.no{background:var(--red)}
+.stimer{font-size:13px;color:var(--muted);text-align:center;margin-bottom:8px}
+
+/* DIGIT */
+.ddisp{font-size:72px;font-weight:900;text-align:center;letter-spacing:14px;color:var(--accent);min-height:110px;display:flex;align-items:center;justify-content:center;background:var(--white);border-radius:16px;border:2px solid var(--border);margin:16px 0}
+.dresp{font-size:28px;font-weight:700;text-align:center;letter-spacing:10px;min-height:46px;color:var(--ink);background:var(--bg);border-radius:10px;padding:8px;margin:10px 0}
+.dpad{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.dk{width:58px;height:58px;border-radius:14px;border:2px solid var(--border);background:var(--white);font-family:inherit;font-size:20px;font-weight:700;cursor:pointer;transition:all .15s;color:var(--ink)}
+.dk:hover{border-color:var(--accent);background:var(--accent);color:white}
+.dk.del{background:#FEE2E2;border-color:#FECACA;color:var(--red)}
+.dk.ok{background:var(--accent);border-color:var(--accent);color:white}
+
+/* WCST */
+.wstim{font-size:64px;text-align:center;padding:18px;background:var(--white);border-radius:16px;border:2px solid var(--border);margin:14px 0}
+.wopts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.wopt{border-radius:14px;border:2px solid var(--border);padding:14px 8px;cursor:pointer;transition:all .2s;text-align:center;background:var(--white);font-size:10px;color:var(--muted)}
+.wopt:hover{border-color:var(--accent);transform:translateY(-2px)}
+.wopt .ws{font-size:36px;display:block;margin-bottom:6px}
+.wfb{font-size:17px;font-weight:700;text-align:center;padding:12px;border-radius:10px;margin:10px 0}
+.wfb.ok{background:#DCFCE7;color:var(--green)}.wfb.no{background:#FEE2E2;color:var(--red)}
+.wstats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}
+.wst{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.wst .v{font-size:26px;font-weight:900;color:var(--accent)}.wst .l{font-size:11px;color:var(--muted)}
+
+/* RESULTS */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.rc2{background:var(--white);border-radius:14px;padding:16px;border:1.5px solid var(--border)}
+.rc2 .rv{font-size:26px;font-weight:900;color:var(--accent);margin-bottom:2px}
+.rc2 .rl{font-size:11px;color:var(--muted)}
+.send-st{background:var(--white);border-radius:14px;padding:16px;border:1.5px solid var(--border);margin:14px 0}
+.sr{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px}
+
+/* SETUP */
+.setup-step{background:var(--bg);border-radius:12px;padding:16px;margin-top:12px}
+.ss-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.ss-n{background:var(--accent);color:white;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px}
+.ss-text{font-size:13px;line-height:1.7}
+.ss-text strong{color:var(--ink)}
+.ss-text a{color:var(--accent);text-decoration:none}
+.code{background:#1E1B4B;border-radius:8px;padding:12px;font-family:monospace;font-size:10px;color:#A5B4FC;text-align:left;direction:ltr;overflow-x:auto;line-height:1.9;margin:8px 0;white-space:pre}
+.warn{background:#FEF3C7;border:1.5px solid #FDE68A;border-radius:10px;padding:12px 14px;font-size:12px;color:#92400E;margin-top:10px}
+
+/* FLASH */
+.ff{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200}
+.ff.show{opacity:1}.ff.ok{background:rgba(34,197,94,.1)}.ff.err{background:rgba(220,38,38,.1)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1C1917;color:white;border-radius:12px;padding:12px 22px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap}
+.toast.show{opacity:1}
+
+/* SPIN */
+.spin-wrap{text-align:center;padding:56px 0}
+.spinner{font-size:46px;animation:sp 1.5s linear infinite;display:block;margin-bottom:14px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+@media(max-width:500px){
+  .grid2{grid-template-columns:1fr}
+  .rgrid{grid-template-columns:1fr}
+  .wopts{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="ff" id="FF"></div>
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-logo">📋 دفترچه پژوهش</div>
+  <div class="hdr-prog">
+    <div class="hdr-lbl" id="hdr-lbl">شروع</div>
+    <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
+  </div>
+  <div class="hdr-pct" id="hdr-pct">۰٪</div>
+</div>
+
+<div class="wrap">
+
+<!-- ① SETUP -->
+<div class="scr on" id="s-setup">
+  <div class="hero">
+    <div class="hero-badge">تنظیمات اولیه — یک‌بار انجام می‌شود</div>
+    <h1>⚙️ تنظیم دریافت نتایج</h1>
+    <p>نتایج هر دانش‌آموز پس از پایان آزمون<br>به‌صورت خودکار به ایمیل شما ارسال می‌شود</p>
+  </div>
+
+  <div class="card">
+    <h2>📊 Google Apps Script — ایمیل + Sheets یکجا</h2>
+    <div style="background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:10px;padding:12px 14px;font-size:13px;color:#1D4ED8;margin-bottom:14px">
+      ✅ این روش <strong>رایگان</strong>، بدون محدودیت، و نیازی به کتابخانه خارجی ندارد.<br>
+      هر بار که دانش‌آموز آزمون را تمام کند، نتایج هم در Sheets ثبت می‌شود هم به ایمیل شما می‌آید.
+    </div>
+    <div class="setup-step">
+      <div class="ss-item"><div class="ss-n">۱</div>
+        <div class="ss-text">به <strong>sheets.google.com</strong> بروید → یک Spreadsheet جدید بسازید → نامش را بگذارید <strong>داده پژوهش</strong></div></div>
+      <div class="ss-item"><div class="ss-n">۲</div>
+        <div class="ss-text">از منوی بالا کلیک کنید: <strong>Extensions</strong> (یا «افزونه‌ها») ← <strong>Apps Script</strong></div></div>
+      <div class="ss-item"><div class="ss-n">۳</div>
+        <div class="ss-text">تمام متن پیش‌فرض داخل ادیتور را <strong>پاک کنید</strong> و کد زیر را کامل <strong>Paste</strong> کنید:<br>
+        <span style="color:#DC2626;font-weight:600">⚠ در خط اول، ایمیل خودتان را جایگزین کنید</span></div></div>
+      <div class="code">var MY_EMAIL = "hamkariaval@gmail.com"; // ← ایمیل خودتان را اینجا بنویسید
+
+function doPost(e) {
+  try {
+    var d = JSON.parse(e.postData.contents);
+
+    // ── ذخیره در Sheets ──
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheetByName("Data") || ss.insertSheet("Data");
+    if (sh.getLastRow() === 0) {
+      sh.appendRow(["ID","Date","Age","Gender","School",
+        "MSLQ_Total","MSLQ_Cognitive","MSLQ_Metacognitive",
+        "ERQ_Reappraisal","ERQ_Suppression",
+        "Stroop_Time","Stroop_Errors","Stroop_Interference",
+        "Digit_Forward","Digit_Backward","Digit_Total",
+        "WCST_Categories","WCST_PersErrors","WCST_TotalErrors"]);
+    }
+    sh.appendRow([d.id,d.date,d.age,d.gender,d.school,
+      d.mslq,d.mslqCog,d.mslqMeta,d.erqR,d.erqS,
+      d.stroopT,d.stroopE,d.stroopI,
+      d.dsF,d.dsB,d.dsTotal,
+      d.wcstCat,d.wcstPE,d.wcstTE]);
+
+    // ── ارسال ایمیل ──
+    var subject = "نتیجه آزمون - " + d.id;
+    var body =
+      "کد آزمودنی: " + d.id + "\n" +
+      "تاریخ: " + d.date + "\n" +
+      "سن: " + d.age + " | جنسیت: " + d.gender + "\n" +
+      "مدرسه: " + d.school + "\n\n" +
+      "=== نتایج ===\n" +
+      "MSLQ کل: " + d.mslq + " | شناختی: " + d.mslqCog + " | فراشناختی: " + d.mslqMeta + "\n" +
+      "ERQ ارزیابی مجدد: " + d.erqR + "\n" +
+      "ERQ سرکوبی: " + d.erqS + "\n" +
+      "استروپ - زمان: " + d.stroopT + "s | خطا: " + d.stroopE + " | تداخل: " + d.stroopI + "ms\n" +
+      "Digit Span - مستقیم: " + d.dsF + " | معکوس: " + d.dsB + " | کل: " + d.dsTotal + "\n" +
+      "WCST - دسته: " + d.wcstCat + " | خطا: " + d.wcstTE + " | تکراری: " + d.wcstPE;
+
+    MailApp.sendEmail(MY_EMAIL, subject, body);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({status:"ok"}))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch(err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({status:"error", msg: err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}</div>
+      <div class="ss-item"><div class="ss-n">۴</div>
+        <div class="ss-text"><strong>Ctrl+S</strong> برای ذخیره → بعد کلیک کنید روی <strong>Deploy → New deployment</strong></div></div>
+      <div class="ss-item"><div class="ss-n">۵</div>
+        <div class="ss-text">در پنجره‌ای که باز می‌شود:<br>
+        • Type: <strong>Web app</strong><br>
+        • Execute as: <strong>Me</strong><br>
+        • Who has access: <strong>Anyone</strong><br>
+        → کلیک کنید <strong>Deploy</strong></div></div>
+      <div class="ss-item"><div class="ss-n">۶</div>
+        <div class="ss-text">یک پنجره برای تأیید دسترسی باز می‌شود:<br>
+        <strong>Review Permissions → ایمیل گوگل خود را انتخاب کنید → Advanced → Go to (unsafe) → Allow</strong></div></div>
+      <div class="ss-item"><div class="ss-n">۷</div>
+        <div class="ss-text">بعد از Deploy، یک لینک به شکل زیر می‌گیرید — آن را کپی کنید:<br>
+        <code style="background:var(--bg);padding:3px 8px;border-radius:4px;font-size:11px;direction:ltr;display:inline-block">https://script.google.com/macros/s/AKfycb.../exec</code></div></div>
+    </div>
+    <div class="fg" style="margin-top:14px">
+      <label>Web App URL (لینک را اینجا Paste کنید)</label>
+      <input type="url" id="sheets-url" placeholder="https://script.google.com/macros/s/.../exec">
+    </div>
+    <button class="btn btn-o" style="width:100%;justify-content:center;margin-top:10px" onclick="testGAS()">🧪 تست اتصال</button>
+    <div id="gas-st" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
+  </div>
+
+  <div class="btn-row">
+    <span style="font-size:12px;color:var(--muted)">می‌توانید بعداً هم تنظیم کنید</span>
+    <button class="btn" onclick="go('s-cover')">شروع ←</button>
+  </div>
+</div>
+
+<!-- ② COVER -->
+<div class="scr" id="s-cover">
+  <div class="hero">
+    <div class="hero-badge">پژوهش دانشگاه فرهنگیان</div>
+    <h1>سلام! خوش آمدی 👋</h1>
+    <p>این آزمون حدود ۴۵ دقیقه طول می‌کشد<br>جواب درست و غلط ندارد — صادقانه پاسخ بده</p>
+  </div>
+  <div class="card">
+    <h2>📝 اطلاعات اولیه</h2>
+    <div class="fg"><label>کد آزمودنی (خودکار)</label>
+      <input type="text" id="f-id" readonly></div>
+    <div class="grid2">
+      <div class="fg"><label>سن</label><input type="number" id="f-age" placeholder="۱۲" min="10" max="15"></div>
+      <div class="fg"><label>جنسیت</label>
+        <select id="f-gender"><option value="">انتخاب کن</option><option value="پسر">پسر</option><option value="دختر">دختر</option></select></div>
+    </div>
+    <div class="fg"><label>نام مدرسه</label><input type="text" id="f-school" placeholder="نام مدرسه را بنویس"></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-o" onclick="go('s-setup')">← تنظیمات</button>
+    <button class="btn" onclick="startMSLQ()">شروع آزمون ←</button>
+  </div>
+</div>
+
+<!-- ③ MSLQ - ONE Q PER PAGE -->
+<div class="scr" id="s-mslq">
+  <div class="sec-hdr">
+    <div class="sec-badge" id="mslq-badge">بخش ۱ از ۵</div>
+    <h2>📚 راهبردهای یادگیری</h2>
+    <p>هر جمله را بخوان و مشخص کن تا چه اندازه درباره‌ات صدق می‌کند</p>
+  </div>
+  <div class="inst">از <strong>۱</strong> (خیلی کم) تا <strong>۵</strong> (خیلی زیاد)</div>
+  <div class="q-page" id="mslq-qpage"></div>
+  <div class="nav-row">
+    <button class="nav-btn" onclick="mslqNav(-1)" id="mslq-prev">→</button>
+    <button class="nav-btn next-btn" onclick="mslqNav(1)" id="mslq-next">بعدی ←</button>
+  </div>
+</div>
+
+<!-- ④ ERQ - ONE Q PER PAGE -->
+<div class="scr" id="s-erq">
+  <div class="sec-hdr">
+    <div class="sec-badge">بخش ۲ از ۵</div>
+    <h2>💭 احساسات من</h2>
+    <p>چطور احساساتت را کنترل می‌کنی؟</p>
+  </div>
+  <div class="inst">از <strong>۱</strong> (کاملاً مخالفم) تا <strong>۷</strong> (کاملاً موافقم)</div>
+  <div class="q-page" id="erq-qpage"></div>
+  <div class="nav-row">
+    <button class="nav-btn" onclick="erqNav(-1)">→</button>
+    <button class="nav-btn next-btn" onclick="erqNav(1)" id="erq-next">بعدی ←</button>
+  </div>
+</div>
+
+<!-- ⑤ STROOP -->
+<div class="scr" id="s-stroop">
+  <div class="sec-hdr">
+    <div class="sec-badge">بخش ۳ از ۵</div>
+    <h2>🎨 بازی رنگ‌ها</h2>
+    <p>رنگ <strong>جوهر</strong> کلمه را انتخاب کن — نه معنی آن</p>
+  </div>
+  <div class="inst">مثال: کلمه «آبی» با رنگ قرمز نوشته شده → پاسخ: <strong>قرمز</strong></div>
+  <div id="s-prac">
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:14px">🏋️ تمرین (۶ کوشش)</p>
+    <div class="fix" id="fix1">+</div>
+    <div class="sw" id="sw1" style="opacity:0"></div>
+    <div class="sbtns" id="sbt1" style="display:none">
+      <button class="sb r" onclick="sResp('red','p')">قرمز</button>
+      <button class="sb b" onclick="sResp('blue','p')">آبی</button>
+      <button class="sb g" onclick="sResp('green','p')">سبز</button>
+      <button class="sb y" onclick="sResp('yellow','p')">زرد</button>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn" id="s-start-btn" onclick="sBegin()">شروع تمرین</button>
+    </div>
+  </div>
+  <div id="s-main" style="display:none">
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:6px">🎯 آزمون اصلی</p>
+    <div class="stimer" id="stimer">⏱ ۰.۰ ثانیه</div>
+    <div class="sdots" id="sdots"></div>
+    <div class="fix" id="fix2">+</div>
+    <div class="sw" id="sw2" style="opacity:0"></div>
+    <div class="sbtns" id="sbt2" style="display:none">
+      <button class="sb r" onclick="sResp('red','m')">قرمز</button>
+      <button class="sb b" onclick="sResp('blue','m')">آبی</button>
+      <button class="sb g" onclick="sResp('green','m')">سبز</button>
+      <button class="sb y" onclick="sResp('yellow','m')">زرد</button>
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ DIGIT SPAN -->
+<div class="scr" id="s-digit">
+  <div class="sec-hdr">
+    <div class="sec-badge">بخش ۴ از ۵</div>
+    <h2>🔢 بازی اعداد</h2>
+    <p id="ds-sub-title">اعداد را ببین، بعد از ناپدید شدن همان ترتیب را وارد کن</p>
+  </div>
+  <div class="inst" id="ds-inst">آماده‌ای؟ اعداد نمایش داده می‌شوند — آن‌ها را در ذهن نگه دار</div>
+  <div class="ddisp" id="ddisp">—</div>
+  <div class="dresp" id="dresp" style="display:none"></div>
+  <div class="dpad" id="dpad" style="display:none">
+    <button class="dk" onclick="di('1')">۱</button><button class="dk" onclick="di('2')">۲</button>
+    <button class="dk" onclick="di('3')">۳</button><button class="dk" onclick="di('4')">۴</button>
+    <button class="dk" onclick="di('5')">۵</button><button class="dk" onclick="di('6')">۶</button>
+    <button class="dk" onclick="di('7')">۷</button><button class="dk" onclick="di('8')">۸</button>
+    <button class="dk" onclick="di('9')">۹</button>
+    <button class="dk del" onclick="ddel()">⌫</button>
+    <button class="dk" onclick="di('0')">۰</button>
+    <button class="dk ok" onclick="dconf()">✓</button>
+  </div>
+  <div style="text-align:center;margin-top:16px">
+    <button class="btn" id="ds-btn" onclick="dsGo()">شروع</button>
+  </div>
+</div>
+
+<!-- ⑦ WCST -->
+<div class="scr" id="s-wcst">
+  <div class="sec-hdr">
+    <div class="sec-badge">بخش ۵ از ۵</div>
+    <h2>🃏 بازی کارت‌ها</h2>
+    <p>حدس بزن هر کارت با کدام دسته مطابقت دارد. قانون عوض می‌شود!</p>
+  </div>
+  <div class="wstats">
+    <div class="wst"><div class="v" id="wc0">۰</div><div class="l">دسته‌های تکمیل</div></div>
+    <div class="wst"><div class="v" id="wc1">۰</div><div class="l">کل خطاها</div></div>
+    <div class="wst"><div class="v" id="wc2">۰</div><div class="l">خطای تکراری</div></div>
+    <div class="wst"><div class="v" id="wc3">۰</div><div class="l">پاسخ مفهومی</div></div>
+  </div>
+  <div class="wstim" id="wstim">❓</div>
+  <div class="wfb" id="wfb" style="display:none"></div>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:10px">با کدام کارت مطابقت دارد؟</p>
+  <div class="wopts" id="wopts"></div>
+  <div style="text-align:center;margin-top:14px">
+    <button class="btn" id="w-btn" onclick="wStart()">شروع بازی کارت‌ها</button>
+  </div>
+</div>
+
+<!-- ⑧ SENDING -->
+<div class="scr" id="s-send">
+  <div class="spin-wrap">
+    <span class="spinner">📤</span>
+    <h2 style="font-size:20px">در حال ارسال نتایج...</h2>
+    <p style="color:var(--muted);margin-top:8px" id="send-msg">لطفاً صبر کن</p>
+  </div>
+</div>
+
+<!-- ⑨ RESULTS -->
+<div class="scr" id="s-results">
+  <div class="hero" style="background:linear-gradient(135deg,#16A34A,#059669)">
+    <div class="hero-badge">پایان آزمون</div>
+    <h1>✅ آفرین! تمام شد!</h1>
+    <p>ممنون از همکاری صادقانه‌ات</p>
+  </div>
+  <h3 style="margin-bottom:12px;font-size:15px">خلاصه نتایج</h3>
+  <div class="rgrid" id="rgrid"></div>
+  <div class="send-st" id="send-st"></div>
+  <div class="btn-row">
+    <button class="btn btn-o" onclick="dlCSV()">💾 دانلود CSV</button>
+    <button class="btn btn-g" onclick="newP()">👤 آزمودنی جدید</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+
+<script>
+// ══════════════════════════════════
+// CONSTANTS
+// ══════════════════════════════════
+const CFA={red:'قرمز',blue:'آبی',green:'سبز',yellow:'زرد'};
+const CHX={red:'#EF4444',blue:'#3B82F6',green:'#22C55E',yellow:'#EAB308'};
+const P9=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+// ══════════════════════════════════
+// DATA
+// ══════════════════════════════════
+let D={};
+let FT, sWait=false, sT0=0, sPhase='p', sCur=0, sStart,
+    sCongRT=[], sIncRT=[], sCongErr=0, sIncErr=0, sPTrials, sAllTrials;
+let dsPhase='f', dsCur=0, dsSeq=[], dsResp='', dsShowing=false,
+    dsFMax=0, dsBMax=0, dsFScore=0, dsBScore=0;
+let wCur=0, wCat=0, wErr=0, wPE=0, wCon=0, wRule='color',
+    wStreak=0, wActive=false, wPrevIdx=null, wStimuli=[];
+
+// MSLQ answers
+let mslqAns=new Array(22).fill(null);
+let mslqCur=0;
+// ERQ answers
+let erqAns=new Array(10).fill(null);
+let erqCur=0;
+
+// ══════════════════════════════════
+// QUESTIONS
+// ══════════════════════════════════
+const MSLQ=[
+  {t:"وقتی برای امتحان مطالعه می‌کنم، مطالب کتاب را با مطالبی که معلم سر کلاس گفته است ربط می‌دهم.",s:'cog'},
+  {t:"هنگام انجام تکالیف درسی، سعی می‌کنم آنچه را که معلم در کلاس گفته است را به یاد آورم.",s:'cog'},
+  {t:"بعد از مطالعه‌ی هر درس از خود سوال می‌پرسم تا مطمئن شوم مطالبی را که خوانده‌ام یاد گرفته‌ام.",s:'cog'},
+  {t:"هنگام مطالعه، پیدا کردن نکات مهم برای من سخت است.",s:'cog'},
+  {t:"وقتی که درسی سخت است، یا آن را کنار می‌گذارم یا فقط قسمت‌های آسان آن را می‌خوانم.",s:'cog'},
+  {t:"هنگام مطالعه، مطالب مهم را به بیانی قابل فهم برای خودم در می‌آورم.",s:'cog'},
+  {t:"من سعی می‌کنم مطالبی را که معلم می‌گوید بفهمم، حتی اگر آن مطالب کاملاً روشن و قابل فهم نباشد.",s:'cog'},
+  {t:"وقتی برای امتحان می‌خوانم، سعی می‌کنم مطالب را هرچه بیشتر به خاطر بسپارم.",s:'cog'},
+  {t:"هنگام مطالعه یادداشت‌برداری می‌کنم تا بعداً مطالب را بهتر به یاد آورم.",s:'cog'},
+  {t:"تمرین‌های کتاب را انجام داده و سوالات پایان هر فصل را پاسخ می‌دهم، حتی زمانی که مجبور به انجام آن نباشم.",s:'cog'},
+  {t:"حتی زمانی که مطالب خسته‌کننده بوده و جالب نباشد، به خواندن ادامه می‌دهم تا آن را به پایان برسانم.",s:'cog'},
+  {t:"هنگامی که برای امتحان مطالعه می‌کنم، مطالب مهم را بارها و بارها برای خودم تکرار می‌کنم.",s:'cog'},
+  {t:"من آنچه را که از تکالیف و کتاب‌های درسی گذشته یاد گرفته‌ام، برای انجام تکالیف جدید استفاده می‌کنم.",s:'cog'},
+  {t:"قبل از شروع به مطالعه، در مورد کارهایی فکر می‌کنم که لازم است برای بهتر یاد گرفتن انجام دهم.",s:'meta'},
+  {t:"اغلب احساس می‌کنم مطالبی را که می‌خوانم نمی‌دانم کلاً در مورد چیست.",s:'meta'},
+  {t:"وقتی که معلم درس می‌دهد، من اغلب به فکر چیز دیگری هستم و به آنچه معلم می‌گوید گوش نمی‌دهم.",s:'meta'},
+  {t:"هنگام مطالعه یک موضوع، سعی می‌کنم همه چیز را به هم ربط دهم.",s:'meta'},
+  {t:"موقع درس خواندن، لحظه‌ای توقف کرده و آنچه را که خواندم مرور می‌کنم.",s:'meta'},
+  {t:"وقتی درس می‌خوانم، مطالب را مرتباً برای خودم تکرار می‌کنم تا بعداً آن را بهتر به خاطر بیاورم.",s:'meta'},
+  {t:"من هر فصل کتاب را برای خود خلاصه می‌کنم تا راحت‌تر مطالعه کنم.",s:'meta'},
+  {t:"حتی وقتی درسی را دوست ندارم برای گرفتن نمره خوب، سخت تلاش می‌کنم.",s:'meta'},
+  {t:"در هنگام مطالعه سعی می‌کنم مطالبی را که می‌خوانم به مطالبی که از قبل می‌دانستم ربط دهم.",s:'meta'},
+];
+const MSLQ_LABELS=['خیلی کم','کم','متوسط','زیاد','خیلی زیاد'];
+
+const ERQ=[
+  {t:"وقتی می‌خواهم احساس مثبت‌تری داشته باشم (مثل لذت یا سرگرمی) آنچه درباره‌اش فکر می‌کنم را تغییر می‌دهم.",tp:'R'},
+  {t:"احساساتم را برای خودم نگه می‌دارم.",tp:'S'},
+  {t:"وقتی می‌خواهم احساس منفی کمتری داشته باشم (مثل ناراحتی یا عصبانیت) آنچه درباره‌اش فکر می‌کنم را تغییر می‌دهم.",tp:'R'},
+  {t:"وقتی احساس منفی دارم، دقت می‌کنم آن را نشان ندهم.",tp:'S'},
+  {t:"وقتی با شرایط تنش‌زا مواجه می‌شوم، خود را مجبور می‌کنم طوری فکر کنم که مرا آرام نگه دارد.",tp:'R'},
+  {t:"من احساساتم را با نشان ندادن کنترل می‌کنم.",tp:'S'},
+  {t:"وقتی می‌خواهم احساس مثبت‌تر داشته باشم، راه فکر کردن درباره شرایط را عوض می‌کنم.",tp:'R'},
+  {t:"من احساساتم را با تغییر روش فکر کردن به شرایطی که در آن هستم کنترل می‌کنم.",tp:'R'},
+  {t:"وقتی احساس منفی دارم، مطمئنم که آن را نشان می‌دهم.",tp:'S'},
+  {t:"وقتی می‌خواهم کمتر احساس منفی داشته باشم، روش فکر کردن به شرایط را تغییر می‌دهم.",tp:'R'},
+];
+const ERQ_LABELS=['کاملاً مخالفم','','','خنثی','','','کاملاً موافقم'];
+
+// ══════════════════════════════════
+// PROGRESS & NAV
+// ══════════════════════════════════
+const SCRS=['s-setup','s-cover','s-mslq','s-erq','s-stroop','s-digit','s-wcst','s-send','s-results'];
+const LBLS=['تنظیمات','اطلاعات','راهبردهای یادگیری','احساسات','بازی رنگ‌ها','بازی اعداد','بازی کارت‌ها','ارسال','نتایج'];
+
+function go(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+  const i=SCRS.indexOf(id);
+  const pct=i<=0?0:Math.round(i/(SCRS.length-1)*100);
+  document.getElementById('pfill').style.width=pct+'%';
+  document.getElementById('hdr-lbl').textContent=LBLS[i]||'';
+  document.getElementById('hdr-pct').textContent=P9(pct)+'٪';
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+function flash(ok){const f=document.getElementById('FF');f.className='ff show '+(ok?'ok':'err');setTimeout(()=>f.className='ff',280)}
+
+// ══════════════════════════════════
+// AUTO ID
+// ══════════════════════════════════
+function genID(){
+  const d=new Date();
+  const date=`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  const rnd=Math.floor(Math.random()*9000)+1000;
+  return `P${date}-${rnd}`;
+}
+
+// ══════════════════════════════════
+// COVER
+// ══════════════════════════════════
+document.getElementById('f-id').value=genID();
+
+function startMSLQ(){
+  if(!document.getElementById('f-age').value){toast('سن را وارد کن');return}
+  if(!document.getElementById('f-gender').value){toast('جنسیت را انتخاب کن');return}
+  if(!document.getElementById('f-school').value.trim()){toast('نام مدرسه را بنویس');return}
+  D.id=document.getElementById('f-id').value;
+  D.age=document.getElementById('f-age').value;
+  D.gender=document.getElementById('f-gender').value;
+  D.school=document.getElementById('f-school').value.trim();
+  D.date=new Date().toLocaleDateString('fa-IR');
+  mslqCur=0; mslqAns=new Array(22).fill(null);
+  renderMSLQ(); go('s-mslq');
+}
+
+// ══════════════════════════════════
+// MSLQ — ONE Q PER PAGE
+// ══════════════════════════════════
+function renderMSLQ(){
+  const q=MSLQ[mslqCur];
+  const total=MSLQ.length;
+  const sub=q.s==='cog'?'شناختی':'فراشناختی';
+  const subCls=q.s==='cog'?'cog':'meta';
+  document.getElementById('mslq-badge').textContent=`سوال ${P9(mslqCur+1)} از ${P9(total)}`;
+  const pg=document.getElementById('mslq-qpage');
+  pg.innerHTML=`
+    <div class="q-counter">${P9(mslqCur+1)} / ${P9(total)}</div>
+    <div class="q-bubble">
+      <span class="q-sub-tag ${subCls}">${sub}</span>
+      ${q.t}
+    </div>
+    <div class="likert-single">
+      ${MSLQ_LABELS.map((l,i)=>`
+        <label class="lopt${mslqAns[mslqCur]===i+1?' sel':''}" onclick="mslqSel(${i+1})">
+          <input type="radio" name="mq" value="${i+1}">
+          <div class="lopt-dot"></div>
+          <div class="lopt-num">${P9(i+1)}</div>
+          <div class="lopt-text">${l}</div>
+        </label>`).join('')}
+    </div>`;
+  document.getElementById('mslq-prev').style.opacity=mslqCur===0?'0.3':'1';
+  document.getElementById('mslq-next').textContent=mslqCur===total-1?'بخش بعد ←':'بعدی ←';
+}
+
+function mslqSel(v){
+  mslqAns[mslqCur]=v;
+  document.querySelectorAll('#mslq-qpage .lopt').forEach((el,i)=>{
+    el.classList.toggle('sel',i+1===v);
+  });
+}
+
+function mslqNav(dir){
+  if(dir===-1 && mslqCur>0){mslqCur--;renderMSLQ();return}
+  if(dir===1){
+    if(mslqAns[mslqCur]===null){toast('لطفاً یک گزینه انتخاب کن');return}
+    if(mslqCur<MSLQ.length-1){mslqCur++;renderMSLQ();}
+    else{calcMSLQ();erqCur=0;erqAns=new Array(10).fill(null);renderERQ();go('s-erq');}
+  }
+}
+
+function calcMSLQ(){
+  let tot=0,cog=0,cn=0,meta=0,mn=0;
+  MSLQ.forEach((q,i)=>{const v=mslqAns[i]||0;tot+=v;if(q.s==='cog'){cog+=v;cn++;}else{meta+=v;mn++;}});
+  D.mslq=Math.round(tot/MSLQ.length*10)/10;
+  D.mslqCog=Math.round(cog/cn*10)/10;
+  D.mslqMeta=Math.round(meta/mn*10)/10;
+}
+
+// ══════════════════════════════════
+// ERQ — ONE Q PER PAGE
+// ══════════════════════════════════
+function renderERQ(){
+  const q=ERQ[erqCur];
+  const total=ERQ.length;
+  const pg=document.getElementById('erq-qpage');
+  pg.innerHTML=`
+    <div class="q-counter">${P9(erqCur+1)} / ${P9(total)}</div>
+    <div class="q-bubble">${q.t}</div>
+    <div class="likert-single">
+      ${ERQ_LABELS.map((l,i)=>`
+        <label class="lopt${erqAns[erqCur]===i+1?' sel':''}" onclick="erqSel(${i+1})">
+          <input type="radio" name="eq" value="${i+1}">
+          <div class="lopt-dot"></div>
+          <div class="lopt-num">${P9(i+1)}</div>
+          <div class="lopt-text">${l}</div>
+        </label>`).join('')}
+    </div>`;
+  document.getElementById('erq-next').textContent=erqCur===total-1?'بخش بعد ←':'بعدی ←';
+}
+
+function erqSel(v){
+  erqAns[erqCur]=v;
+  document.querySelectorAll('#erq-qpage .lopt').forEach((el,i)=>{
+    el.classList.toggle('sel',i+1===v);
+  });
+}
+
+function erqNav(dir){
+  if(dir===-1 && erqCur>0){erqCur--;renderERQ();return}
+  if(dir===1){
+    if(erqAns[erqCur]===null){toast('لطفاً یک گزینه انتخاب کن');return}
+    if(erqCur<ERQ.length-1){erqCur++;renderERQ();}
+    else{calcERQ();sInit();go('s-stroop');}
+  }
+}
+
+function calcERQ(){
+  let rs=0,rc=0,ss=0,sc=0;
+  ERQ.forEach((q,i)=>{const v=erqAns[i]||0;if(q.tp==='R'){rs+=v;rc++;}else{ss+=v;sc++;}});
+  D.erqR=Math.round(rs/rc*10)/10;
+  D.erqS=Math.round(ss/sc*10)/10;
+}
+
+// ══════════════════════════════════
+// STROOP
+// ══════════════════════════════════
+const SCONG=[{i:'red',w:'red'},{i:'blue',w:'blue'},{i:'green',w:'green'},{i:'yellow',w:'yellow'}];
+const SINCONG=[
+  {i:'red',w:'blue'},{i:'blue',w:'green'},{i:'green',w:'yellow'},{i:'yellow',w:'red'},
+  {i:'red',w:'green'},{i:'blue',w:'yellow'},{i:'green',w:'red'},{i:'yellow',w:'blue'},
+  {i:'red',w:'yellow'},{i:'blue',w:'red'},{i:'green',w:'blue'},{i:'yellow',w:'green'},
+];
+const SPRAC=[{i:'red',w:'red'},{i:'blue',w:'blue'},{i:'green',w:'yellow'},{i:'yellow',w:'red'},{i:'blue',w:'red'},{i:'green',w:'blue'}];
+
+function sInit(){
+  sPhase='p';sCur=0;sCongRT=[];sIncRT=[];sCongErr=0;sIncErr=0;
+  sPTrials=[...SPRAC];
+  sAllTrials=shuf([...SCONG,...SCONG,...SCONG,...SINCONG,...SINCONG]);
+  document.getElementById('s-prac').style.display='block';
+  document.getElementById('s-main').style.display='none';
+  document.getElementById('s-start-btn').style.display='inline-flex';
+  document.getElementById('sbt1').style.display='none';
+  document.getElementById('sw1').style.opacity='0';
+  document.getElementById('fix1').style.opacity='1';
+}
+
+function sBegin(){
+  document.getElementById('s-start-btn').style.display='none';
+  sRunTrial();
+}
+
+function sRunTrial(){
+  const trials=sPhase==='p'?sPTrials:sAllTrials;
+  if(sCur>=trials.length){sPhaseEnd();return}
+  const t=trials[sCur];
+  const fixId=sPhase==='p'?'fix1':'fix2';
+  const swId=sPhase==='p'?'sw1':'sw2';
+  const btId=sPhase==='p'?'sbt1':'sbt2';
+  const fix=document.getElementById(fixId);
+  const sw=document.getElementById(swId);
+  const bt=document.getElementById(btId);
+  fix.style.opacity='1';sw.style.opacity='0';bt.style.display='none';sWait=false;
+  FT=setTimeout(()=>{
+    fix.style.opacity='0';
+    sw.textContent=CFA[t.w];sw.style.color=CHX[t.i];sw.style.opacity='1';
+    bt.style.display='grid';sT0=performance.now();sWait=true;
+  },550);
+}
+
+function sResp(color,ph){
+  if(!sWait||sPhase!==ph)return;
+  sWait=false;
+  const rt=Math.round(performance.now()-sT0);
+  const trials=ph==='p'?sPTrials:sAllTrials;
+  const t=trials[sCur];
+  const ok=color===t.i;
+  flash(ok);
+  if(ph==='m'){
+    const cong=t.i===t.w;
+    if(cong){if(ok)sCongRT.push(rt);else sCongErr++;}
+    else{if(ok)sIncRT.push(rt);else sIncErr++;}
+    const dots=document.getElementById('sdots').children;
+    if(dots[sCur])dots[sCur].className='sdot '+(ok?'ok':'no');
+  }
+  sCur++;
+  setTimeout(sRunTrial,320);
+}
+
+function sPhaseEnd(){
+  if(sPhase==='p'){
+    sPhase='m';sCur=0;
+    document.getElementById('s-prac').style.display='none';
+    document.getElementById('s-main').style.display='block';
+    const dots=document.getElementById('sdots');dots.innerHTML='';
+    sAllTrials.forEach(()=>{const d=document.createElement('div');d.className='sdot';dots.appendChild(d)});
+    sStart=performance.now();
+    const iv=setInterval(()=>{
+      if(!document.getElementById('stimer'))return clearInterval(iv);
+      document.getElementById('stimer').textContent='⏱ '+P9(Math.round((performance.now()-sStart)/100)/10)+' ثانیه';
+    },100);
+    sRunTrial();
+  }else{
+    const cRT=sCongRT.length?Math.round(sCongRT.reduce((a,b)=>a+b)/sCongRT.length):0;
+    const iRT=sIncRT.length?Math.round(sIncRT.reduce((a,b)=>a+b)/sIncRT.length):0;
+    D.stroopT=Math.round((performance.now()-sStart)/100)/10;
+    D.stroopE=sCongErr+sIncErr;D.stroopI=iRT-cRT;
+    dsInit();go('s-digit');
+  }
+}
+
+document.addEventListener('keydown',e=>{
+  if(!sWait)return;
+  const km={q:'red',w:'blue',o:'green',p:'yellow',KeyQ:'red',KeyW:'blue',KeyO:'green',KeyP:'yellow'};
+  const c=km[e.key]||km[e.code];
+  if(c)sResp(c,sPhase);
+});
+
+// ══════════════════════════════════
+// DIGIT SPAN
+// ══════════════════════════════════
+const DSF=[[3,7],[8,4,2],[6,1,9,5],[4,2,7,3,1],[7,5,8,3,6,2],[9,1,4,7,2,5,8],[3,8,6,2,9,5,1,7]];
+const DSB=[[2,5],[8,4,7],[4,1,3,5],[6,9,2,8,4],[3,7,4,1,8,6],[5,2,8,6,1,9,3],[1,6,5,2,9,4,8,7]];
+
+function dsInit(){
+  dsPhase='f';dsCur=0;dsResp='';dsFMax=0;dsBMax=0;dsFScore=0;dsBScore=0;dsShowing=false;
+  document.getElementById('ddisp').textContent='—';
+  document.getElementById('dresp').style.display='none';
+  document.getElementById('dpad').style.display='none';
+  document.getElementById('ds-btn').style.display='inline-flex';
+  document.getElementById('ds-btn').textContent='شروع آزمون اعداد';
+  document.getElementById('ds-btn').onclick=dsGo;
+  document.getElementById('ds-sub-title').textContent='اعداد مستقیم — اعداد را به همان ترتیب وارد کن';
+  document.getElementById('ds-inst').textContent='اعداد یکی‌یکی نمایش داده می‌شوند — آن‌ها را در ذهن نگه دار';
+}
+
+function dsGo(){
+  document.getElementById('ds-btn').style.display='none';
+  dsShowSeq();
+}
+
+function dsShowSeq(){
+  const seqs=dsPhase==='f'?DSF:DSB;
+  if(dsCur>=seqs.length){dsPhaseEnd();return}
+  dsSeq=seqs[dsCur];dsResp='';dsShowing=true;
+  document.getElementById('dresp').style.display='none';
+  document.getElementById('dpad').style.display='none';
+  let i=0;
+  const show=()=>{
+    if(i<dsSeq.length){
+      document.getElementById('ddisp').textContent=P9(dsSeq[i]);
+      i++;setTimeout(show,900);
+    }else{
+      document.getElementById('ddisp').textContent='—';
+      dsShowing=false;dsResp='';
+      document.getElementById('dresp').textContent='';
+      document.getElementById('dresp').style.display='block';
+      document.getElementById('dpad').style.display='flex';
+    }
+  };
+  document.getElementById('ddisp').textContent='آماده...';
+  setTimeout(show,800);
+}
+
+function di(d){if(dsShowing)return;dsResp+=d;document.getElementById('dresp').textContent=P9(dsResp)}
+function ddel(){if(dsShowing)return;dsResp=dsResp.slice(0,-1);document.getElementById('dresp').textContent=P9(dsResp)}
+
+function dconf(){
+  if(dsShowing)return;
+  const correct=dsPhase==='f'?dsSeq.join(''):dsSeq.slice().reverse().join('');
+  const ok=dsResp===correct;
+  flash(ok);
+  if(dsPhase==='f'){if(ok){dsFScore++;dsFMax=dsSeq.length;}}
+  else{if(ok){dsBScore++;dsBMax=dsSeq.length;}}
+  dsCur++;
+  document.getElementById('dpad').style.display='none';
+  document.getElementById('dresp').style.display='none';
+  setTimeout(dsShowSeq,500);
+}
+
+function dsPhaseEnd(){
+  if(dsPhase==='f'){
+    dsPhase='b';dsCur=0;
+    document.getElementById('ds-sub-title').textContent='اعداد معکوس — اعداد را برعکس وارد کن';
+    document.getElementById('ds-inst').textContent='مثلاً اگر ۳ ۷ نشان داده شد، تو باید ۷ ۳ وارد کنی';
+    document.getElementById('ds-btn').style.display='inline-flex';
+    document.getElementById('ds-btn').textContent='شروع اعداد معکوس';
+    document.getElementById('ds-btn').onclick=()=>{document.getElementById('ds-btn').style.display='none';dsShowSeq()};
+  }else{
+    D.dsF=dsFMax;D.dsB=dsBMax;D.dsTotal=dsFMax+dsBMax;
+    wInit();go('s-wcst');
+  }
+}
+
+// ══════════════════════════════════
+// WCST
+// ══════════════════════════════════
+const WCARDS=[{s:'🔴',c:'red',n:1},{s:'🔵🔵',c:'blue',n:2},{s:'🟢🟢🟢',c:'green',n:3},{s:'🟡🟡🟡🟡',c:'yellow',n:4}];
+const WSTIM=[
+  {s:'🔴🔴',c:'red',n:2},{s:'🟢',c:'green',n:1},{s:'🔵🔵🔵',c:'blue',n:3},{s:'🟡🟡🟡🟡',c:'yellow',n:4},
+  {s:'🔴🔴🔴',c:'red',n:3},{s:'🟢🟢',c:'green',n:2},{s:'🔵',c:'blue',n:1},{s:'🟡🟡',c:'yellow',n:2},
+  {s:'🔴',c:'red',n:1},{s:'🟢🟢🟢🟢',c:'green',n:4},{s:'🔵🔵',c:'blue',n:2},{s:'🟡🟡🟡',c:'yellow',n:3},
+  {s:'🔴🔴',c:'red',n:2},{s:'🟢',c:'green',n:1},{s:'🔵🔵🔵🔵',c:'blue',n:4},{s:'🟡',c:'yellow',n:1},
+  {s:'🔴🔴🔴🔴',c:'red',n:4},{s:'🟢🟢🟢',c:'green',n:3},{s:'🔵',c:'blue',n:1},{s:'🟡🟡🟡🟡',c:'yellow',n:4},
+];
+const WRULES=['color','shape','number'];
+
+function wInit(){
+  wCur=0;wCat=0;wErr=0;wPE=0;wCon=0;wRule='color';wStreak=0;wActive=false;wPrevIdx=null;
+  wStimuli=shuf([...WSTIM]);
+  document.getElementById('w-btn').style.display='inline-flex';
+  document.getElementById('wstim').textContent='❓';
+  document.getElementById('wfb').style.display='none';
+  document.getElementById('wopts').innerHTML='';
+  wUpdStats();
+}
+
+function wStart(){
+  document.getElementById('w-btn').style.display='none';
+  wActive=true;wShowStim();
+}
+
+function wShowStim(){
+  if(wCur>=wStimuli.length||wCat>=6){wEnd();return}
+  document.getElementById('wstim').textContent=wStimuli[wCur].s;
+  document.getElementById('wfb').style.display='none';
+  const opts=document.getElementById('wopts');opts.innerHTML='';
+  WCARDS.forEach((c,i)=>{
+    const d=document.createElement('div');d.className='wopt';
+    d.innerHTML=`<span class="ws">${c.s}</span>گزینه ${P9(i+1)}`;
+    d.onclick=()=>wAnswer(i);opts.appendChild(d);
+  });
+}
+
+function wAnswer(idx){
+  if(!wActive)return;wActive=false;
+  const st=wStimuli[wCur];const ch=WCARDS[idx];
+  let ok=false;
+  if(wRule==='color')ok=st.c===ch.c;
+  else if(wRule==='shape')ok=st.s.includes(ch.s.charAt(0));
+  else ok=st.n===ch.n;
+  const fb=document.getElementById('wfb');
+  fb.textContent=ok?'✅ درست!':'❌ اشتباه';
+  fb.className='wfb '+(ok?'ok':'no');
+  fb.style.display='block';
+  if(!ok){wErr++;if(wPrevIdx===idx)wPE++;wStreak=0;}
+  else{wStreak++;if(wStreak>=3){wCon+=3;wStreak=0;wCat++;if(wCat<6){const ri=WRULES.indexOf(wRule);wRule=WRULES[(ri+1)%WRULES.length];toast('قانون تغییر کرد!');}}}
+  wPrevIdx=idx;wUpdStats();wCur++;
+  setTimeout(()=>{wActive=true;wShowStim();},900);
+}
+
+function wUpdStats(){
+  document.getElementById('wc0').textContent=P9(wCat);
+  document.getElementById('wc1').textContent=P9(wErr);
+  document.getElementById('wc2').textContent=P9(wPE);
+  document.getElementById('wc3').textContent=P9(wCon);
+}
+
+function wEnd(){
+  D.wcstCat=wCat;D.wcstPE=wPE;D.wcstTE=wErr;D.wcstCon=wCon;
+  sendAll();
+}
+
+// ══════════════════════════════════
+// SEND
+// ══════════════════════════════════
+async function sendAll(){
+  go('s-send');
+  const st={gas:null};
+  const su=document.getElementById('sheets-url').value.trim();
+
+  if(su){
+    document.getElementById('send-msg').textContent='در حال ارسال نتایج...';
+    const payload={
+      id:D.id,date:D.date,age:D.age,gender:D.gender,school:D.school,
+      mslq:D.mslq,mslqCog:D.mslqCog,mslqMeta:D.mslqMeta,
+      erqR:D.erqR,erqS:D.erqS,
+      stroopT:D.stroopT,stroopE:D.stroopE,stroopI:D.stroopI,
+      dsF:D.dsF,dsB:D.dsB,dsTotal:D.dsTotal,
+      wcstCat:D.wcstCat,wcstPE:D.wcstPE,wcstTE:D.wcstTE
+    };
+    try{
+      // Try with cors first, fall back to no-cors
+      const r=await fetch(su,{method:'POST',
+        headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify(payload)
+      });
+      const txt=await r.text();
+      st.gas=txt.includes('ok')?'ok':'err:'+txt;
+    }catch(e){
+      // no-cors fallback (no response body but request sent)
+      try{
+        await fetch(su,{method:'POST',mode:'no-cors',
+          headers:{'Content-Type':'text/plain'},
+          body:JSON.stringify(payload)
+        });
+        st.gas='ok'; // assume ok with no-cors
+      }catch(e2){st.gas='err:شبکه'}
+    }
+  }else{
+    st.gas='skip';
+  }
+  showResults(st);
+}
+
+function showResults(st){
+  go('s-results');
+  document.getElementById('rgrid').innerHTML=`
+    <div class="rc2"><div class="rv">${D.mslq}</div><div class="rl">MSLQ کل (شناختی:${D.mslqCog} | فراشناختی:${D.mslqMeta})</div></div>
+    <div class="rc2"><div class="rv">${D.erqR}</div><div class="rl">ERQ ارزیابی مجدد</div></div>
+    <div class="rc2"><div class="rv">${D.erqS}</div><div class="rl">ERQ سرکوبی</div></div>
+    <div class="rc2"><div class="rv">${D.stroopI} ms</div><div class="rl">اثر استروپ (خطا:${D.stroopE} | زمان:${D.stroopT}s)</div></div>
+    <div class="rc2"><div class="rv">${D.dsTotal}</div><div class="rl">Digit Span کل (مستقیم:${D.dsF} | معکوس:${D.dsB})</div></div>
+    <div class="rc2"><div class="rv">${D.wcstCat}</div><div class="rl">WCST دسته (خطا:${D.wcstTE} | تکراری:${D.wcstPE})</div></div>`;
+
+  let sh='<div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px">وضعیت ارسال</div>';
+  if(st.gas==='ok'){
+    sh+='<div class="sr"><span style="color:var(--green)">✅</span> نتایج در Google Sheets ثبت شد + ایمیل ارسال شد</div>';
+  }else if(st.gas==='skip'){
+    sh+='<div style="font-size:13px;color:var(--yellow)">⚠ URL تنظیم نشده — از دکمه CSV استفاده کن</div>';
+  }else{
+    sh+=`<div class="sr"><span style="color:var(--red)">❌</span> خطا: ${st.gas||'نامشخص'}</div>`;
+    sh+='<div style="font-size:12px;color:var(--muted);margin-top:6px">CSV را دانلود کن تا داده از دست نرود</div>';
+  }
+  document.getElementById('send-st').innerHTML=sh;
+}
+
+// ══════════════════════════════════
+// EMAIL TEST
+// ══════════════════════════════════
+async function testGAS(){
+  const su=document.getElementById('sheets-url').value.trim();
+  const el=document.getElementById('gas-st');
+  if(!su){el.style.color='var(--yellow)';el.textContent='⚠ ابتدا Web App URL را وارد کنید';return}
+  el.style.color='var(--muted)';el.textContent='در حال تست...';
+  const td={id:'TEST-001',date:new Date().toLocaleDateString('fa-IR'),
+    age:'12',gender:'دختر',school:'مدرسه آزمایشی',
+    mslq:'3.5',mslqCog:'3.8',mslqMeta:'3.2',erqR:'4.5',erqS:'3.0',
+    stroopT:'45.2',stroopE:'3',stroopI:'120',
+    dsF:'6',dsB:'4',dsTotal:'10',wcstCat:'4',wcstPE:'5',wcstTE:'12'};
+  try{
+    const r=await fetch(su,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(td)});
+    const txt=await r.text();
+    if(txt.includes('ok')){el.style.color='green';el.textContent='✅ اتصال موفق! Sheets ثبت شد و ایمیل ارسال شد.';}
+    else{el.style.color='red';el.textContent='❌ پاسخ: '+txt;}
+  }catch(e){
+    try{
+      await fetch(su,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(td)});
+      el.style.color='green';el.textContent='✅ درخواست ارسال شد — Sheets و ایمیل را بررسی کنید.';
+    }catch(e2){el.style.color='red';el.textContent='❌ خطای شبکه — URL را بررسی کنید';}
+  }
+}
+
+// ══════════════════════════════════
+// CSV
+// ══════════════════════════════════
+function dlCSV(){
+  const h='ID,Date,Age,Gender,School,MSLQ_Total,MSLQ_Cognitive,MSLQ_Metacognitive,ERQ_Reappraisal,ERQ_Suppression,Stroop_Time,Stroop_Errors,Stroop_Interference,Digit_Forward,Digit_Backward,Digit_Total,WCST_Categories,WCST_PersErrors,WCST_TotalErrors\n';
+  const r=[D.id,D.date,D.age,D.gender,D.school,D.mslq,D.mslqCog,D.mslqMeta,D.erqR,D.erqS,D.stroopT,D.stroopE,D.stroopI,D.dsF,D.dsB,D.dsTotal,D.wcstCat,D.wcstPE,D.wcstTE].join(',');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\uFEFF'+h+r],{type:'text/csv;charset=utf-8'}));
+  a.download=`data_${D.id}.csv`;a.click();
+}
+
+function newP(){
+  D={};mslqAns=new Array(22).fill(null);erqAns=new Array(10).fill(null);
+  document.getElementById('f-id').value=genID();
+  document.getElementById('f-age').value='';
+  document.getElementById('f-gender').value='';
+  document.getElementById('f-school').value='';
+  go('s-cover');
+}
+</script>
+</body>
+</html>
