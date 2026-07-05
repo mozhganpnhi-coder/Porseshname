@@ -182,119 +182,11 @@ body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--ink);mi
 
 <div class="wrap">
 
-<!-- ① SETUP -->
-<div class="scr on" id="s-setup">
-  <div class="hero">
-    <div class="hero-badge">آماده برای استفاده ✅</div>
-    <h1>⚙️ وضعیت سیستم</h1>
-    <p>سیستم کاملاً تنظیم شده است<br>نتایج به‌صورت خودکار ارسال می‌شود</p>
-  </div>
-  <div class="card">
-    <h2>✅ تنظیمات فعال</h2>
-    <div style="background:#DCFCE7;border-radius:12px;padding:16px;font-size:14px;line-height:2">
-      📧 ایمیل: <strong>hamkariaval@gmail.com</strong><br>
-      📊 Google Sheets: <strong>داده های پژوهش</strong><br>
-      🔗 اتصال: <strong>برقرار</strong>
-    </div>
-    <button class="btn btn-o" style="width:100%;justify-content:center;margin-top:14px" onclick="testGAS()">🧪 تست اتصال</button>
-    <div id="gas-st" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
-  </div>
-
-  <div class="card">
-    <h2>📊 Google Apps Script — ایمیل + Sheets یکجا</h2>
-    <div style="background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:10px;padding:12px 14px;font-size:13px;color:#1D4ED8;margin-bottom:14px">
-      ✅ این روش <strong>رایگان</strong>، بدون محدودیت، و نیازی به کتابخانه خارجی ندارد.<br>
-      هر بار که دانش‌آموز آزمون را تمام کند، نتایج هم در Sheets ثبت می‌شود هم به ایمیل شما می‌آید.
-    </div>
-    <div class="setup-step">
-      <div class="ss-item"><div class="ss-n">۱</div>
-        <div class="ss-text">به <strong>sheets.google.com</strong> بروید → یک Spreadsheet جدید بسازید → نامش را بگذارید <strong>داده پژوهش</strong></div></div>
-      <div class="ss-item"><div class="ss-n">۲</div>
-        <div class="ss-text">از منوی بالا کلیک کنید: <strong>Extensions</strong> (یا «افزونه‌ها») ← <strong>Apps Script</strong></div></div>
-      <div class="ss-item"><div class="ss-n">۳</div>
-        <div class="ss-text">تمام متن پیش‌فرض داخل ادیتور را <strong>پاک کنید</strong> و کد زیر را کامل <strong>Paste</strong> کنید:<br>
-        <span style="color:#DC2626;font-weight:600">⚠ در خط اول، ایمیل خودتان را جایگزین کنید</span></div></div>
-      <div class="code">var MY_EMAIL = "hamkariaval@gmail.com"; // ← ایمیل خودتان را اینجا بنویسید
-
-function doPost(e) {
-  try {
-    var d = JSON.parse(e.postData.contents);
-
-    // ── ذخیره در Sheets ──
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sh = ss.getSheetByName("Data") || ss.insertSheet("Data");
-    if (sh.getLastRow() === 0) {
-      sh.appendRow(["ID","Date","Age","Gender","School",
-        "MSLQ_Total","MSLQ_Cognitive","MSLQ_Metacognitive",
-        "ERQ_Reappraisal","ERQ_Suppression",
-        "Stroop_Time","Stroop_Errors","Stroop_Interference",
-        "Digit_Forward","Digit_Backward","Digit_Total",
-        "WCST_Categories","WCST_PersErrors","WCST_TotalErrors"]);
-    }
-    sh.appendRow([d.id,d.date,d.age,d.gender,d.school,
-      d.mslq,d.mslqCog,d.mslqMeta,d.erqR,d.erqS,
-      d.stroopT,d.stroopE,d.stroopI,
-      d.dsF,d.dsB,d.dsTotal,
-      d.wcstCat,d.wcstPE,d.wcstTE]);
-
-    // ── ارسال ایمیل ──
-    var subject = "نتیجه آزمون - " + d.id;
-    var body =
-      "کد آزمودنی: " + d.id + "\n" +
-      "تاریخ: " + d.date + "\n" +
-      "سن: " + d.age + " | جنسیت: " + d.gender + "\n" +
-      "مدرسه: " + d.school + "\n\n" +
-      "=== نتایج ===\n" +
-      "MSLQ کل: " + d.mslq + " | شناختی: " + d.mslqCog + " | فراشناختی: " + d.mslqMeta + "\n" +
-      "ERQ ارزیابی مجدد: " + d.erqR + "\n" +
-      "ERQ سرکوبی: " + d.erqS + "\n" +
-      "استروپ - زمان: " + d.stroopT + "s | خطا: " + d.stroopE + " | تداخل: " + d.stroopI + "ms\n" +
-      "Digit Span - مستقیم: " + d.dsF + " | معکوس: " + d.dsB + " | کل: " + d.dsTotal + "\n" +
-      "WCST - دسته: " + d.wcstCat + " | خطا: " + d.wcstTE + " | تکراری: " + d.wcstPE;
-
-    MailApp.sendEmail(MY_EMAIL, subject, body);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({status:"ok"}))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch(err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({status:"error", msg: err.toString()}))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}</div>
-      <div class="ss-item"><div class="ss-n">۴</div>
-        <div class="ss-text"><strong>Ctrl+S</strong> برای ذخیره → بعد کلیک کنید روی <strong>Deploy → New deployment</strong></div></div>
-      <div class="ss-item"><div class="ss-n">۵</div>
-        <div class="ss-text">در پنجره‌ای که باز می‌شود:<br>
-        • Type: <strong>Web app</strong><br>
-        • Execute as: <strong>Me</strong><br>
-        • Who has access: <strong>Anyone</strong><br>
-        → کلیک کنید <strong>Deploy</strong></div></div>
-      <div class="ss-item"><div class="ss-n">۶</div>
-        <div class="ss-text">یک پنجره برای تأیید دسترسی باز می‌شود:<br>
-        <strong>Review Permissions → ایمیل گوگل خود را انتخاب کنید → Advanced → Go to (unsafe) → Allow</strong></div></div>
-      <div class="ss-item"><div class="ss-n">۷</div>
-        <div class="ss-text">بعد از Deploy، یک لینک به شکل زیر می‌گیرید — آن را کپی کنید:<br>
-        <code style="background:var(--bg);padding:3px 8px;border-radius:4px;font-size:11px;direction:ltr;display:inline-block">https://script.google.com/macros/s/AKfycb.../exec</code></div></div>
-    </div>
-    <div class="fg" style="margin-top:14px">
-      <label>Web App URL (لینک را اینجا Paste کنید)</label>
-      <input type="url" id="sheets-url" placeholder="https://script.google.com/macros/s/.../exec">
-    </div>
-    <button class="btn btn-o" style="width:100%;justify-content:center;margin-top:10px" onclick="testGAS()">🧪 تست اتصال</button>
-    <div id="gas-st" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
-  </div>
-
-  <div class="btn-row">
-    <span style="font-size:12px;color:var(--muted)">می‌توانید بعداً هم تنظیم کنید</span>
-    <button class="btn" onclick="go('s-cover')">شروع ←</button>
-  </div>
-</div>
+<!-- ① SETUP - hidden -->
+<div class="scr" id="s-setup"></div>
 
 <!-- ② COVER -->
-<div class="scr" id="s-cover">
+<div class="scr on" id="s-cover">
   <div class="hero">
     <div class="hero-badge">پژوهش دانشگاه فرهنگیان</div>
     <h1>سلام! خوش آمدی 👋</h1>
@@ -312,7 +204,7 @@ function doPost(e) {
     <div class="fg"><label>نام مدرسه</label><input type="text" id="f-school" placeholder="نام مدرسه را بنویس"></div>
   </div>
   <div class="btn-row">
-    <button class="btn btn-o" onclick="go('s-setup')">← تنظیمات</button>
+    <span></span>
     <button class="btn" onclick="startMSLQ()">شروع آزمون ←</button>
   </div>
 </div>
