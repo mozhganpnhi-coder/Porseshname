@@ -404,77 +404,6 @@ body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--ink);mi
   </div>
 </div>
 
-<!-- WCST VIDEO -->
-<div class="scr" id="s-wcst-video">
-  <div class="sec-hdr">
-    <div class="sec-badge">🃏 بخش ۵ از ۵</div>
-    <h2>🃏 بازی کارت‌ها</h2>
-    <p>قبل از شروع، قوانین را بخوان</p>
-  </div>
-  <div class="card">
-    <div style="font-size:22px;font-weight:700;margin-bottom:14px">📌 قانون بازی:</div>
-    <div style="font-size:17px;line-height:2.2">
-      ۱. یک کارت در وسط نشان داده می‌شود 🃏<br>
-      ۲. باید آن را با یکی از ۴ کارت بالا مطابقت بدهی<br>
-      ۳. بعد از هر انتخاب، می‌گوییم ✅ درست یا ❌ اشتباه<br>
-      ۴. <span style="color:var(--red);font-weight:700">⚠️ مهم:</span> قانون ممکن است در طول بازی عوض شود!<br>
-      ۵. وقتی مرتب اشتباه گرفتی، یعنی قانون عوض شده — دوباره حدس بزن
-    </div>
-  </div>
-  <div class="inst">
-    قانون می‌تواند بر اساس <strong>رنگ</strong>، <strong>شکل</strong> یا <strong>تعداد</strong> باشد.<br>
-    خودت باید بفهمی قانون چیه! 🧠
-  </div>
-  <div class="btn-row">
-    <span></span>
-    <button class="btn" onclick="go('s-wcst');wInit()">شروع بازی کارت‌ها ←</button>
-  </div>
-</div>
-
-<!-- WCST -->
-<div class="scr" id="s-wcst">
-  <div class="sec-hdr">
-    <div class="sec-badge">🃏 بخش ۵ از ۵</div>
-    <h2>🃏 بازی کارت‌ها</h2>
-    <p>کارت وسط را با یکی از ۴ کارت پایین مطابقت بده</p>
-  </div>
-
-  <!-- آمار کوچک -->
-  <div style="display:flex;gap:8px;margin-bottom:14px">
-    <div style="flex:1;background:var(--white);border-radius:12px;padding:8px;text-align:center;border:1.5px solid var(--border)">
-      <div style="font-size:20px;font-weight:900;color:var(--accent)" id="wc0">۰</div>
-      <div style="font-size:10px;color:var(--muted)">دسته</div>
-    </div>
-    <div style="flex:1;background:var(--white);border-radius:12px;padding:8px;text-align:center;border:1.5px solid var(--border)">
-      <div style="font-size:20px;font-weight:900;color:var(--red)" id="wc1">۰</div>
-      <div style="font-size:10px;color:var(--muted)">خطا</div>
-    </div>
-    <div style="flex:1;background:var(--white);border-radius:12px;padding:8px;text-align:center;border:1.5px solid var(--border)">
-      <div style="font-size:20px;font-weight:900;color:var(--warm)" id="wc2">۰</div>
-      <div style="font-size:10px;color:var(--muted)">تکراری</div>
-    </div>
-    <div style="flex:1;background:var(--white);border-radius:12px;padding:8px;text-align:center;border:1.5px solid var(--border)">
-      <div style="font-size:20px;font-weight:900;color:var(--blue)" id="wc3">۰</div>
-      <div style="font-size:10px;color:var(--muted)">مفهومی</div>
-    </div>
-  </div>
-
-  <!-- کارت آزمون بزرگ وسط -->
-  <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:8px;font-weight:600">🎯 این کارت را با کدام گزینه تطابق بده؟</p>
-  <div class="wcst-stim-area" id="wcst-stim-area">
-    <div class="wcard stim-card"><div style="font-size:48px">❓</div></div>
-  </div>
-  <div class="wfb" id="wfb" style="display:none"></div>
-
-  <!-- گزینه‌ها پایین -->
-  <p style="font-size:13px;color:var(--muted);text-align:center;margin:12px 0 8px;font-weight:600">👇 یکی را انتخاب کن:</p>
-  <div class="wcst-ref-cards" id="wcst-refs"></div>
-
-  <div style="text-align:center;margin-top:14px">
-    <button class="btn" id="w-btn" onclick="wStart()">▶ شروع بازی کارت‌ها</button>
-  </div>
-</div>
-
 <!-- SENDING -->
 <div class="scr" id="s-send">
   <div class="spin-wrap">
@@ -518,7 +447,7 @@ const DIGIT_SPEED=1500; // 1.5 ثانیه برای هر رقم
 // ══════════════════════════════════
 let D={};
 let FT,sWait=false,sT0=0,sPhase='p',sCur=0,sStart,sCongRT=[],sIncRT=[],sCongErr=0,sIncErr=0,sPTrials,sAllTrials;
-let dsPhase='f',dsCur=0,dsSeq=[],dsResp='',dsShowing=false,dsFMax=0,dsBMax=0,dsFScore=0,dsBScore=0;
+let dsPhase='f',dsCur=0,dsSeq=[],dsSeqPair=[],dsTry=0,dsResp='',dsShowing=false,dsFMax=0,dsBMax=0,dsFScore=0,dsBScore=0;
 let wCur=0,wCat=0,wErr=0,wPE=0,wCon=0,wRule='color',wStreak=0,wActive=false,wPrevIdx=null,wStimuli=[];
 let mslqAns=new Array(22).fill(null),mslqCur=0;
 let erqAns=new Array(10).fill(null),erqCur=0;
@@ -627,8 +556,8 @@ const WCST_RULES=['color','shape','number'];
 // ══════════════════════════════════
 // NAV & PROGRESS
 // ══════════════════════════════════
-const SCRS=['s-setup','s-cover','s-mslq','s-erq','s-stroop-video','s-stroop','s-digit-video','s-digit','s-wcst-video','s-wcst','s-send','s-results'];
-const LBLS=['','اطلاعات','راهبردهای یادگیری','احساسات','آموزش رنگ‌ها','بازی رنگ‌ها','آموزش اعداد','بازی اعداد','آموزش کارت‌ها','بازی کارت‌ها','ارسال','نتایج'];
+const SCRS=['s-setup','s-cover','s-mslq','s-erq','s-stroop-video','s-stroop','s-digit-video','s-digit','s-send','s-results'];
+const LBLS=['','اطلاعات','راهبردهای یادگیری','احساسات','آموزش رنگ‌ها','بازی رنگ‌ها','آموزش اعداد','بازی اعداد','ارسال','نتایج'];
 
 function go(id){
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
@@ -763,7 +692,12 @@ function erqNav(dir){
 
 function calcERQ(){
   let rs=0,rc=0,ss=0,sc=0;
-  ERQ.forEach((q,i)=>{const v=erqAns[i]||0;if(q.tp==='R'){rs+=v;rc++;}else{ss+=v;sc++;}});
+  ERQ.forEach((q,i)=>{
+    let v=erqAns[i]||0;
+    // سوال ۹ (index 8) معکوس است — نمره‌گذاری معکوس
+    if(i===8) v=8-v;
+    if(q.tp==='R'){rs+=v;rc++;}else{ss+=v;sc++;}
+  });
   D.erqR=Math.round(rs/rc*10)/10;
   D.erqS=Math.round(ss/sc*10)/10;
 }
@@ -882,8 +816,24 @@ document.addEventListener('keydown',e=>{
 // ══════════════════════════════════
 // DIGIT SPAN — 1.5s per digit
 // ══════════════════════════════════
-const DSF=[[3,7],[8,4,2],[6,1,9,5],[4,2,7,3,1],[7,5,8,3,6,2],[9,1,4,7,2,5,8],[3,8,6,2,9,5,1,7]];
-const DSB=[[2,5],[8,4,7],[4,1,3,5],[6,9,2,8,4],[3,7,4,1,8,6],[5,2,8,6,1,9,3],[1,6,5,2,9,4,8,7]];
+const DSF=[
+  [[3,7],[6,2]],
+  [[8,4,2],[5,1,9]],
+  [[6,1,9,5],[3,7,2,8]],
+  [[4,2,7,3,1],[7,5,1,9,3]],
+  [[7,5,8,3,6,2],[4,1,9,6,3,8]],
+  [[9,1,4,7,2,5,8],[3,6,1,8,5,2,7]],
+  [[3,8,6,2,9,5,1,7],[5,2,7,4,1,8,3,6]]
+];
+const DSB=[
+  [[2,5],[4,1]],
+  [[8,4,7],[3,9,2]],
+  [[4,1,3,5],[6,2,8,1]],
+  [[6,9,2,8,4],[3,5,1,7,2]],
+  [[3,7,4,1,8,6],[5,2,9,3,6,1]],
+  [[5,2,8,6,1,9,3],[7,4,1,8,3,6,2]],
+  [[1,6,5,2,9,4,8,7],[3,8,2,6,4,1,9,5]]
+];
 
 function dsInit(){
   dsPhase='f';dsCur=0;dsResp='';dsFMax=0;dsBMax=0;dsFScore=0;dsBScore=0;dsShowing=false;
@@ -908,10 +858,17 @@ function dsGo(){
 function dsShowSeq(){
   const seqs=dsPhase==='f'?DSF:DSB;
   if(dsCur>=seqs.length){dsPhaseEnd();return}
-  dsSeq=seqs[dsCur];dsResp='';dsShowing=true;
+  // هر آیتم الان آرایه‌ای از ۲ توالی است
+  const pair=seqs[dsCur];
+  dsSeqPair=pair; dsTry=0; dsSeq=pair[0];
+  dsResp='';dsShowing=true;
   document.getElementById('dresp').style.display='none';
   document.getElementById('dpad').style.display='none';
-  document.getElementById('ds-inst').textContent=`طول: ${P9(dsSeq.length)} عدد — آماده باش!`;
+  document.getElementById('ds-inst').textContent=`طول: ${P9(dsSeq.length)} عدد — کوشش ۱ از ۲`;
+  showDigits();
+}
+
+function showDigits(){
   let i=0;
   const show=()=>{
     if(i<dsSeq.length){
@@ -938,13 +895,29 @@ function dconf(){
   const correct=dsPhase==='f'?dsSeq.join(''):dsSeq.slice().reverse().join('');
   const ok=dsResp===correct;
   flash(ok);
-  if(dsPhase==='f'){if(ok){dsFScore++;dsFMax=dsSeq.length;}}
-  else{if(ok){dsBScore++;dsBMax=dsSeq.length;}}
-  dsCur++;
   document.getElementById('dpad').style.display='none';
   document.getElementById('dresp').style.display='none';
   document.getElementById('ddisp').textContent=ok?'✅':'❌';
-  setTimeout(dsShowSeq,700);
+
+  if(ok){
+    // کوشش موفق — ثبت و برو طول بعدی
+    if(dsPhase==='f'){dsFScore++;dsFMax=dsSeq.length;}
+    else{dsBScore++;dsBMax=dsSeq.length;}
+    dsCur++;
+    setTimeout(dsShowSeq,700);
+  }else{
+    // کوشش ناموفق — اگه کوشش دوم داریم امتحان کن
+    dsTry++;
+    if(dsTry<2){
+      dsSeq=dsSeqPair[1];dsResp='';dsShowing=true;
+      document.getElementById('ds-inst').textContent=`طول: ${P9(dsSeq.length)} عدد — کوشش ۲ از ۲`;
+      setTimeout(showDigits,800);
+    }else{
+      // هر دو کوشش ناموفق — پایان آزمون
+      dsCur++;
+      setTimeout(dsShowSeq,700);
+    }
+  }
 }
 
 function dsPhaseEnd(){
@@ -961,7 +934,7 @@ function dsPhaseEnd(){
     document.getElementById('ddisp').textContent='—';
   }else{
     D.dsF=dsFMax;D.dsB=dsBMax;D.dsTotal=dsFMax+dsBMax;
-    go('s-wcst-video');
+    go('s-send');sendAll();
   }
 }
 
@@ -1046,8 +1019,7 @@ async function sendAll(){
     mslq:D.mslq,mslqCog:D.mslqCog,mslqMeta:D.mslqMeta,
     erqR:D.erqR,erqS:D.erqS,
     stroopT:D.stroopT,stroopE:D.stroopE,stroopI:D.stroopI,
-    dsF:D.dsF,dsB:D.dsB,dsTotal:D.dsTotal,
-    wcstCat:D.wcstCat,wcstPE:D.wcstPE,wcstTE:D.wcstTE
+    dsF:D.dsF,dsB:D.dsB,dsTotal:D.dsTotal
   };
   let gas=null;
   document.getElementById('send-msg').textContent='در حال ارسال...';
@@ -1071,8 +1043,7 @@ function showResults(gas){
     <div class="rc2"><div class="rv">${D.erqR}</div><div class="rl">ERQ ارزیابی مجدد</div></div>
     <div class="rc2"><div class="rv">${D.erqS}</div><div class="rl">ERQ سرکوبی</div></div>
     <div class="rc2"><div class="rv">${D.stroopI}ms</div><div class="rl">اثر استروپ (خطا:${D.stroopE}|زمان:${D.stroopT}s)</div></div>
-    <div class="rc2"><div class="rv">${D.dsTotal}</div><div class="rl">Digit Span (مستقیم:${D.dsF}|معکوس:${D.dsB})</div></div>
-    <div class="rc2"><div class="rv">${D.wcstCat}</div><div class="rl">WCST دسته (خطا:${D.wcstTE}|تکراری:${D.wcstPE})</div></div>`;
+    <div class="rc2"><div class="rv">${D.dsTotal}</div><div class="rl">Digit Span (مستقیم:${D.dsF}|معکوس:${D.dsB})</div></div>`;
   let sh='<div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px">وضعیت ارسال</div>';
   if(gas==='ok')sh+='<div class="sr"><span style="color:var(--green)">✅</span> نتایج ارسال و ثبت شد</div>';
   else sh+='<div class="sr"><span style="color:var(--red)">❌</span> خطا — CSV را دانلود کن</div>';
@@ -1083,8 +1054,8 @@ function showResults(gas){
 // CSV
 // ══════════════════════════════════
 function dlCSV(){
-  const h='ID,Date,Age,Gender,Grade,School,MSLQ_Total,MSLQ_Cognitive,MSLQ_Metacognitive,ERQ_Reappraisal,ERQ_Suppression,Stroop_Time,Stroop_Errors,Stroop_Interference,Digit_Forward,Digit_Backward,Digit_Total,WCST_Categories,WCST_PersErrors,WCST_TotalErrors\n';
-  const r=[D.id,D.date,D.age,D.gender,D.grade,D.school,D.mslq,D.mslqCog,D.mslqMeta,D.erqR,D.erqS,D.stroopT,D.stroopE,D.stroopI,D.dsF,D.dsB,D.dsTotal,D.wcstCat,D.wcstPE,D.wcstTE].join(',');
+  const h='ID,Date,Age,Gender,School,MSLQ_Total,MSLQ_Cognitive,MSLQ_Metacognitive,ERQ_Reappraisal,ERQ_Suppression,Stroop_Time,Stroop_Errors,Stroop_Interference,Digit_Forward,Digit_Backward,Digit_Total\n';
+  const r=[D.id,D.date,D.age,D.gender,D.school,D.mslq,D.mslqCog,D.mslqMeta,D.erqR,D.erqS,D.stroopT,D.stroopE,D.stroopI,D.dsF,D.dsB,D.dsTotal].join(',');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+h+r],{type:'text/csv;charset=utf-8'}));
   a.download=`data_${D.id}.csv`;a.click();
